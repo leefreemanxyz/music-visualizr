@@ -52,11 +52,11 @@ class App extends Component {
         <div style={styles.dates}>
           <div style={styles.dates.div}>
           <span style={styles.dates.span}>Start</span>
-        <input type="date" id="startDate" onChange={this.handleChange}/>
+        <input type="date" id="startDate" aria-label="Start date" onChange={this.handleChange}/>
         </div>
         <div style={styles.dates.div}>
         <span style={styles.dates.span}>End</span>
-        <input type="date" id="endDate" onChange={this.handleChange}/>
+        <input type="date" id="endDate" aria-label="End date" onChange={this.handleChange}/>
         </div>
         </div>
         <Overview startDate={this.state.startDate} endDate={this.state.endDate} />
