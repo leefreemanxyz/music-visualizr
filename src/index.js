@@ -12,8 +12,8 @@ import muiTheme from './assets/styles/theme'
 import { ApolloClient, ApolloProvider, createNetworkInterface } from 'react-apollo';
 
 const networkInterface = createNetworkInterface({
-  // uri: 'https://listen-log.leefreeman.xyz/graphql'
-  uri: 'http://localhost:3000/graphql'
+  uri: 'https://listen-log.leefreeman.xyz/graphql'
+  // uri: 'http://localhost:3000/graphql'
 });
 const client = new ApolloClient({
   networkInterface: networkInterface
