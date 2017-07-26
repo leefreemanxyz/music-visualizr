@@ -27,22 +27,22 @@ breakdownGraphs:{
 
 export default class OverviewListens extends PureComponent {
   render() {
+    const { playbacks } = this.props.data
     return (
       <div style={styles.graphsContainer}>
-        {this.props.data.playbacks &&
+        {playbacks &&
           <div>
           <div>
-            <p>Total playbacks: {this.props.data.playbacks.length}</p>
+            <p>Total playbacks: {playbacks.length}</p>
           </div>
           <div style={styles.playbackGraph}>
             <div style={styles.breakdownGraphs}>
-            <DailyPlaybackGraph data={this.props.data.playbacks}/>
+            <DailyPlaybackGraph data={playbacks}/>
             </div>
             <div style={styles.breakdownGraphs}>
-              <ArtistGraph data={this.props.data.playbacks}/>
-
-            <AlbumGraph data={this.props.data.playbacks}/>
-            <SongGraph data={this.props.data.playbacks}/>
+              <ArtistGraph data={playbacks}/>
+              <AlbumGraph data={playbacks}/>
+              <SongGraph data={playbacks}/>
             </div>
           </div>
         </div>}

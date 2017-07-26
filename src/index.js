@@ -5,6 +5,10 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'typeface-roboto'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+
 import { ApolloClient, ApolloProvider, createNetworkInterface } from 'react-apollo';
 
 const networkInterface = createNetworkInterface({
@@ -17,7 +21,9 @@ const client = new ApolloClient({
 
 ReactDOM.render(
     <ApolloProvider client={client}>
+      <MuiThemeProvider>
       <App />
+      </MuiThemeProvider>
     </ApolloProvider>,
     document.getElementById('root'));
 registerServiceWorker();

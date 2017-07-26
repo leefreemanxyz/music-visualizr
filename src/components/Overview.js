@@ -19,13 +19,16 @@ const MyQuery = gql`
         created_at
         song{
           name,
+          song_uri,
           artist{
             name,
-            artist_image
+            artist_image,
+            artist_uri
           }
           album{
             name,
-            album_image
+            album_image,
+            album_uri
           }
         }
 
