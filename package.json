@@ -2,11 +2,14 @@
   "name": "music-visualizr",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://music-visualizr.leefreeman.xyz",
+  "homepage": "https://music-visualizr.leefreeman.xyz",
   "dependencies": {
+    "material-ui": "^0.18.7",
     "react": "^15.6.1",
     "react-apollo": "^1.4.3",
     "react-dom": "^15.6.1",
+    "react-spotify-player": "^1.0.2",
+    "react-tap-event-plugin": "^2.0.1",
     "recharts": "^1.0.0-alpha.2",
     "typeface-roboto": "^0.0.31"
   },

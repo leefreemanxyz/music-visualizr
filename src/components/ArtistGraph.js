@@ -18,9 +18,11 @@ const styles = {
   }
 }
 export default class ArtistGraph extends PureComponent {
+  changeSpotifyPlayer(artist){
+    this.props.onArtistClick(artist, "artist")
+  }
   renderTooltip(event){
     if(event.payload.length > 0){
-    console.log(event.payload[0].payload.artist.artist_image)
     const name = event.payload[0].payload.artist.name
     const image = event.payload[0].payload.artist.artist_image
     const count = event.payload[0].payload.count
@@ -56,7 +58,7 @@ export default class ArtistGraph extends PureComponent {
             <Bar dataKey="count">
               {
                 artists.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={palette[index % palette.length]}/>
+                  <Cell key={`cell-${index}`} fill={palette[index % palette.length]} onClick={()=>this.changeSpotifyPlayer(entry)}/>
                 ))
               }
             </Bar>
