@@ -14,6 +14,14 @@ const styles = {
 }
 
 export default class SongGraph extends PureComponent {
+  constructor(props){
+    super(props)
+
+    this.changeSpotifyPlayer = this.changeSpotifyPlayer.bind(this)
+  }
+  changeSpotifyPlayer(song){
+    this.props.onSongClick(song, "song")
+  }
   render(){
     const { data } = this.props
     let songs = data.map((datum)=>{
@@ -41,7 +49,7 @@ export default class SongGraph extends PureComponent {
             <Bar dataKey="count">
               {
                 songs.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={palette[index % palette.length]}/>
+                  <Cell key={`cell-${index}`} fill={palette[index % palette.length]} onClick={()=>this.changeSpotifyPlayer(entry)}/>
                 ))
               }
             </Bar>

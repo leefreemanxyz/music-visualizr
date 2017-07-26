@@ -7,21 +7,24 @@ import 'typeface-roboto'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-
+import muiTheme from './assets/styles/theme'
 
 import { ApolloClient, ApolloProvider, createNetworkInterface } from 'react-apollo';
 
 const networkInterface = createNetworkInterface({
-  uri: 'https://listen-log.leefreeman.xyz/graphql'
-  // uri: 'http://localhost:3000/graphql'
+  // uri: 'https://listen-log.leefreeman.xyz/graphql'
+  uri: 'http://localhost:3000/graphql'
 });
 const client = new ApolloClient({
   networkInterface: networkInterface
 });
 
+injectTapEventPlugin()
+
+
 ReactDOM.render(
     <ApolloProvider client={client}>
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={muiTheme}>
       <App />
       </MuiThemeProvider>
     </ApolloProvider>,

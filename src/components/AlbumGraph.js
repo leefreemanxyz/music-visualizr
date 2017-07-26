@@ -19,9 +19,11 @@ const styles = {
 }
 
 export default class AlbumGraph extends PureComponent {
+  changeSpotifyPlayer(album){
+    this.props.onAlbumClick(album, "album")
+  }
   renderTooltip(event){
     if(event.payload.length > 0){
-    console.log(event.payload[0].payload.album.album_image)
     const name = event.payload[0].payload.album.name
     const image = event.payload[0].payload.album.album_image
     const count = event.payload[0].payload.count
@@ -57,7 +59,7 @@ export default class AlbumGraph extends PureComponent {
           <Bar dataKey="count">
             {
               albums.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={palette[index % palette.length]}/>
+                <Cell key={`cell-${index}`} fill={palette[index % palette.length]} onClick={()=>this.changeSpotifyPlayer(entry)}/>
               ))
             }
           </Bar>

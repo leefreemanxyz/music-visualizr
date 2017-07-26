@@ -1,68 +1,66 @@
-import React, { Component } from 'react'
-
+import React, {Component} from 'react'
 
 import Overview from './components/Overview'
 import Header from './components/Header'
 
-
-
 const styles = {
   app: {
     fontFamily: "Roboto",
-    backgroundColor:"#80cbc4"
+    backgroundColor: "#80cbc4"
   },
   dates: {
     width: "980px",
     margin: "0 auto",
-    justifyContent:"space-around",
-    alignItems:"flex-end",
+    justifyContent: "space-around",
+    alignItems: "flex-end",
     display: "flex",
     padding: "10px",
-    textAlign:"center",
+    textAlign: "center",
     span: {
-      paddingRight:"10px"
+      paddingRight: "10px"
     },
     div: {
       display: "flex"
     }
   },
   datesDiv: {
-    display:"flex",
-
+    display: "flex"
   }
 }
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     let startDate = new Date(Date.now() - (86400000 * 7))
-    let endDate =  new Date(Date.now())
-    this.state ={
+    let endDate = new Date(Date.now())
+    this.state = {
       startDate: startDate,
-      endDate: endDate
+      endDate: endDate,
+      defStartDate: startDate,
+      defEndDate: endDate
     }
     this.handleChange = this.handleChange.bind(this)
+    this.changeStartDate = this.changeStartDate.bind(this)
+    this.changeEndDate = this.changeEndDate.bind(this)
   }
-  handleChange(event){
-  this.setState({
-    [event.target.id]: event.target.value
-  })
+  handleChange(event) {
+    this.setState({
+      [event.target.id]: event.target.value
+    })
+  }
+  changeStartDate(value) {
+    console.log(value)
+    this.setState({startDate: value.toDateString()})
+  }
+  changeEndDate(value) {
+    this.setState({endDate: value.toDateString()})
   }
   render() {
     return (
       <div style={styles.app}>
-        <Header />
-        <div style={styles.dates}>
-          <div style={styles.dates.div}>
-          <span style={styles.dates.span}>Start</span>
-        <input type="date" id="startDate" aria-label="Start date" onChange={this.handleChange}/>
-        </div>
-        <div style={styles.dates.div}>
-        <span style={styles.dates.span}>End</span>
-        <input type="date" id="endDate" aria-label="End date" onChange={this.handleChange}/>
-        </div>
-        </div>
-        <Overview startDate={this.state.startDate} endDate={this.state.endDate} />
+        <Header defaultStartDate={this.state.defStartDate} defaultEndDate={this.state.defEndDate} onStartDateChange={this.changeStartDate} onEndDateChange={this.changeEndDate}/>
+
+        <Overview startDate={this.state.startDate} endDate={this.state.endDate}/>
       </div>
     );
   }

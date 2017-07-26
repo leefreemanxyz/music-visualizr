@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react'
+import SpotifyPlayer  from 'react-spotify-player'
 import DailyPlaybackGraph from './DailyPlaybackGraph'
 import ArtistGraph from './ArtistGraph'
 import AlbumGraph from './AlbumGraph'
@@ -25,7 +26,38 @@ breakdownGraphs:{
 }
 }
 
+const size = {
+  width: '100%',
+  height: 300,
+};
+const view = 'coverart'; // or 'coverart'
+const theme = 'white'; // or 'white'
+
+
 export default class OverviewListens extends PureComponent {
+  constructor(props){
+    super(props)
+    this.state = {
+      spotify: "spotify:album:1TIUsv8qmYLpBEhvmBmyBk"
+    }
+    this.setSpotifyEmbed = this.setSpotifyEmbed.bind(this)
+  }
+  setSpotifyEmbed(event, type){
+    let value = ''
+    if(type==='song'){
+      value=event.song.song_uri
+    }
+    if(type==='album'){
+      console.log(event)
+      value = event.album.album_uri
+    }
+    if(type==='artist'){
+      value = event.artist.artist_uri
+    }
+    this.setState({
+      spotify: value
+    })
+  }
   render() {
     const { playbacks } = this.props.data
     return (
@@ -38,11 +70,17 @@ export default class OverviewListens extends PureComponent {
           <div style={styles.playbackGraph}>
             <div style={styles.breakdownGraphs}>
             <DailyPlaybackGraph data={playbacks}/>
+            <SpotifyPlayer
+              uri={this.state.spotify}
+              size={size}
+              view={view}
+              theme={theme}
+            />
             </div>
             <div style={styles.breakdownGraphs}>
-              <ArtistGraph data={playbacks}/>
-              <AlbumGraph data={playbacks}/>
-              <SongGraph data={playbacks}/>
+              <ArtistGraph data={playbacks} onArtistClick={this.setSpotifyEmbed}/>
+              <AlbumGraph data={playbacks} onAlbumClick={this.setSpotifyEmbed}/>
+              <SongGraph data={playbacks} onSongClick={this.setSpotifyEmbed}/>
             </div>
           </div>
         </div>}
