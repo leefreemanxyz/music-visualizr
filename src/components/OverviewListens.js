@@ -30,7 +30,7 @@ const size = {
   width: '100%',
   height: 300,
 };
-const view = 'coverart'; // or 'coverart'
+const view = 'list'; // or 'coverart'
 const theme = 'white'; // or 'white'
 
 
@@ -38,7 +38,7 @@ export default class OverviewListens extends PureComponent {
   constructor(props){
     super(props)
     this.state = {
-      spotify: "spotify:album:1TIUsv8qmYLpBEhvmBmyBk"
+      spotify: ""
     }
     this.setSpotifyEmbed = this.setSpotifyEmbed.bind(this)
   }

@@ -47,8 +47,8 @@ export default class Header extends PureComponent {
     return (
       <AppBar style={styles.flexChildren}
       title="MusicVisualizr">
-      <DatePicker hintText="Start Date" container="inline" defaultDate={this.props.defaultStartDate} onChange={this.changeStartDate}/>
-      <DatePicker hintText="End Date" container="inline" defaultDate={this.props.defaultEndDate} onChange={this.changeEndDate}/>
+      <DatePicker floatingLabelText="Start Date" container="inline" defaultDate={this.props.defaultStartDate} onChange={this.changeStartDate}/>
+      <DatePicker floatingLabelText="End Date" container="inline" defaultDate={this.props.defaultEndDate} onChange={this.changeEndDate}/>
           <div style={styles.github}><GitHubIcon/></div>
           <div style={styles.twitter}><TwitterIcon/></div>
       </AppBar>

@@ -1,5 +1,7 @@
 import React, {PureComponent} from 'react'
 import { BarChart, Bar, Tooltip, XAxis, YAxis, Cell} from 'recharts'
+import TextField from 'material-ui/TextField'
+
 import {palette} from '../palette'
 const styles = {
   graph: {
@@ -16,8 +18,19 @@ const styles = {
 export default class SongGraph extends PureComponent {
   constructor(props){
     super(props)
-
-    this.changeSpotifyPlayer = this.changeSpotifyPlayer.bind(this)
+    this.state = {
+      limit: 25
+    }
+    this.updateLimit = this.updateLimit.bind(this)
+  }
+  componentDidMount(){
+    let randSong = this.props.data[Math.floor(Math.random() * this.props.data.length)]
+    this.changeSpotifyPlayer(randSong)
+  }
+  updateLimit(event, value){
+    this.setState({
+      limit: value
+    })
   }
   changeSpotifyPlayer(song){
     this.props.onSongClick(song, "song")
@@ -39,9 +52,12 @@ export default class SongGraph extends PureComponent {
     songs.sort((a,b)=>{
       return b.count - a.count
     })
+    songs = songs.slice(0,this.state.limit)
+
     return (
       <div style={styles.graph}>
-        <h3 style={styles.title}>Songs</h3>
+          <TextField floatingLabelText="Song Limit" defaultValue="25 "type="number" onChange={(event,value)=> this.updateLimit(event,value)}/>
+
         <BarChart data={songs} width={300} height={300}>
           <XAxis dataKey="song.name" hide={true} />
           <YAxis />
@@ -54,6 +70,7 @@ export default class SongGraph extends PureComponent {
               }
             </Bar>
         </BarChart>
+        <span>Songs</span>
       </div>
     )
   }

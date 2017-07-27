@@ -21,15 +21,15 @@ export default class DailyPlaybackGraph extends PureComponent {
       {day: "Thursday", count:0},
       {day: "Friday", count:0},
       {day: "Saturday", count:0}
-    ]    
+    ]
     this.props.data.forEach((v, i) => {
       let day = (new Date(v.created_at)).getDay()
       daysOfWeek[day].count += 1
     })
     return (
       <div style={styles.graph}>
-        <BarChart data={daysOfWeek} width={600} height={300}>
-          <XAxis dataKey="day"/>
+        <BarChart data={daysOfWeek} width={700} height={300}>
+          <XAxis dataKey="day" tickLine={false}/>
           <YAxis />
           <Tooltip  />
           <Bar dataKey="count">
