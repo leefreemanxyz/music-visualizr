@@ -1,13 +1,11 @@
 import React, {PureComponent} from 'react'
 import { BarChart, Bar, Tooltip, XAxis, YAxis, Cell} from 'recharts'
 import {palette} from '../palette'
+import TextField from 'material-ui/TextField'
 const styles = {
   graph: {
     padding:"10px",
     boxShadow: "0 1px 1px rgba(0,0,0,0.15)"
-  },
-  title: {
-    textAlign: "center"
   },
   tooltip:{
     display:"flex",
@@ -19,9 +17,22 @@ const styles = {
 }
 
 export default class AlbumGraph extends PureComponent {
+  constructor(props){
+    super(props)
+    this.state = {
+      limit: 25
+    }
+    this.updateLimit = this.updateLimit.bind(this)
+  }
+  updateLimit(event, value){
+    this.setState({
+      limit: value
+    })
+  }
   changeSpotifyPlayer(album){
     this.props.onAlbumClick(album, "album")
   }
+
   renderTooltip(event){
     if(event.payload.length > 0){
     const name = event.payload[0].payload.album.name
@@ -49,11 +60,12 @@ export default class AlbumGraph extends PureComponent {
     albums.sort((a,b)=>{
       return b.count - a.count
     })
+    albums = albums.slice(0,this.state.limit)
     return (
       <div style={styles.graph}>
-        <h3 style={styles.title}>Albums</h3>
+        <TextField floatingLabelText="Album Limit" defaultValue="25 "type="number" onChange={(event,value)=> this.updateLimit(event,value)}/>
          <BarChart data={albums} width={300} height={300}>
-          <XAxis dataKey="album.name" hide={true} />
+          <XAxis dataKey="album.name" hide={true}/>
           <YAxis />
           <Tooltip content={this.renderTooltip.bind(this)}/>
           <Bar dataKey="count">
@@ -64,7 +76,7 @@ export default class AlbumGraph extends PureComponent {
             }
           </Bar>
         </BarChart>
-
+        <span>Albums</span>
       </div>
     )
   }
