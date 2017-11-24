@@ -22,9 +22,10 @@ export default class DailyPlaybackGraph extends PureComponent {
       {day: "Friday", count:0},
       {day: "Saturday", count:0}
     ]
+    console.log(daysOfWeek)
     this.props.data.forEach((v, i) => {
-      let day = (new Date(v.created_at)).getDay()
-      daysOfWeek[day].count += 1
+      let dayIndex = new Date(v.created_at.replace(/-/g, '/')).getDay()
+      daysOfWeek[dayIndex].count += 1
     })
     return (
       <div style={styles.graph}>

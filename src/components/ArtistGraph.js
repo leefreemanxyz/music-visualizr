@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
 import { BarChart, Bar, Tooltip, XAxis, YAxis, Cell} from 'recharts'
+
 import TextField from 'material-ui/TextField'
 import {palette} from '../palette'
 const styles = {
@@ -25,6 +26,7 @@ export default class ArtistGraph extends PureComponent {
       limit: 25
     }
     this.updateLimit = this.updateLimit.bind(this)
+    // this.changeSpotifyPlayer = this.changeSpotifyPlayer.bind(this)
   }
   updateLimit(event, value){
     this.setState({
@@ -65,7 +67,8 @@ export default class ArtistGraph extends PureComponent {
 
     return (
       <div style={styles.graph}>
-          <TextField floatingLabelText="Artist Limit" defaultValue="25 "type="number" onChange={(event,value)=> this.updateLimit(event,value)}/>
+        <TextField floatingLabelText="Artist Limit" defaultValue="25 "type="number" onChange={(event,value)=> this.updateLimit(event,value)}/>
+
 
          <BarChart data={artists} width={300} height={300}>
           <XAxis dataKey="artist.name" hide={true} />
@@ -79,6 +82,7 @@ export default class ArtistGraph extends PureComponent {
               }
             </Bar>
         </BarChart>
+
         <span>Artists</span>
       </div>
     )
