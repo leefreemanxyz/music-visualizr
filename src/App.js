@@ -1,15 +1,18 @@
 import React, {Component} from 'react'
+import { Switch, Route } from 'react-router-dom'
 
-import Overview from './components/Overview'
+import Home from './components/Home'
+import PublicProfile from './components/PublicProfile'
+import SignIn from './components/SignIn'
 import Header from './components/Header'
+import {SiteFooter} from './styled-components/SiteFooter'
 
 const styles = {
   app: {
     fontFamily: "Roboto",
-    backgroundColor: "#80cbc4"
+    // backgroundColor: "#80cbc4"
   },
   dates: {
-    width: "980px",
     margin: "0 auto",
     justifyContent: "space-around",
     alignItems: "flex-end",
@@ -32,7 +35,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     let startDate = new Date(Date.now() - (86400000 * 7))
-    let endDate = new Date(Date.now())
+    let endDate = new Date(Date.now() + 86400000)
     this.state = {
       startDate: startDate,
       endDate: endDate,
@@ -49,7 +52,6 @@ class App extends Component {
     })
   }
   changeStartDate(value) {
-    console.log(value)
     this.setState({startDate: value.toDateString()})
   }
   changeEndDate(value) {
@@ -59,8 +61,13 @@ class App extends Component {
     return (
       <div style={styles.app}>
         <Header defaultStartDate={this.state.defStartDate} defaultEndDate={this.state.defEndDate} onStartDateChange={this.changeStartDate} onEndDateChange={this.changeEndDate}/>
-
-        <Overview startDate={this.state.startDate} endDate={this.state.endDate}/>
+        <Switch>
+          <Route exact path='/' component={Home}/>
+          {/* <Route exact path='/dashboard' component={Dashboard}/> */}
+          <Route exact path='/user/:userId' component={PublicProfile}/>
+          <Route exact path='/token/:token' component={SignIn}/>
+        </Switch>
+        <SiteFooter/>
       </div>
     );
   }
