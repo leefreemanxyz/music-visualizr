@@ -4,29 +4,39 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'typeface-roboto'
+// import { BrowserRouter } from 'react-router-dom'
+import { ConnectedRouter } from 'react-router-redux'
+import {history} from './store'
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-import muiTheme from './assets/styles/theme'
+import { Provider } from 'react-redux'
+import store from './store'
 
-import { ApolloClient, ApolloProvider, createNetworkInterface } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloProvider } from 'react-apollo';
 
-const networkInterface = createNetworkInterface({
-  uri: 'https://listen-log.leefreeman.xyz/graphql'
-  // uri: 'http://localhost:3000/graphql'
-});
+// const networkInterface = createNetworkInterface({
+//   // uri: 'https://listen-log.leefreeman.xyz/graphql'
+//   uri: 'http://localhost:3001/graphql'
+// });
+
+
 const client = new ApolloClient({
-  networkInterface: networkInterface
+  link: new HttpLink({uri: 'http://localhost:3001/graphql'}),
+  cache: new InMemoryCache()
 });
 
-injectTapEventPlugin()
+// injectTapEventPlugin()
 
 
 ReactDOM.render(
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
     <ApolloProvider client={client}>
-      <MuiThemeProvider muiTheme={muiTheme}>
       <App />
-      </MuiThemeProvider>
-    </ApolloProvider>,
+    </ApolloProvider>
+  </ConnectedRouter>
+    </Provider>,
     document.getElementById('root'));
 registerServiceWorker();
