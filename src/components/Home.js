@@ -5,7 +5,7 @@ export default class Home extends PureComponent {
     return(
       <div>
         <SignInBanner>
-          <a href="http://localhost:3001/users/auth/spotify"><SignInButton>Sign in with Spotify</SignInButton></a>
+          <a href="http://listen-log.leefreeman.xyz/users/auth/spotify"><SignInButton>Sign in with Spotify</SignInButton></a>
         </SignInBanner>
       </div>
     )

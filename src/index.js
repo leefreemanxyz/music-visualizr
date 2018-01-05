@@ -23,7 +23,7 @@ import { ApolloProvider } from 'react-apollo';
 
 
 const client = new ApolloClient({
-  link: new HttpLink({uri: 'http://localhost:3001/graphql'}),
+  link: new HttpLink({uri: 'https://listen-log.leefreeman.xyz/graphql'}),
   cache: new InMemoryCache()
 });
 
